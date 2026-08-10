@@ -10,16 +10,18 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# ИСПРАВЛЕНО: СКАЧИВАЕМ И ЗАПУСКАЕМ РЕАЛЬНЫЙ СКРИПТ УСТАНОВКИ 3X-UI
+# ТУТ ВСЁ ИСПРАВЛЕНО: СКАЧИВАЕМ И ЗАПУСКАЕМ РЕАЛЬНЫЙ СКРИПТ УСТАНОВКИ 3X-UI
 RUN bash <(curl -Ls https://githubusercontent.com) <<EOF
 y
 admin
 admin12345
-8080
+10000
 EOF
 
-# ОТКРЫВАЕМ ПОРТ (Для Render/Koyeb лучше использовать стандартный 8080)
-EXPOSE 8080
+# ОТКРЫВАЕМ ПОРТ 10000 (Для Render нужен именно он)
+EXPOSE 10000
 
 # ЗАПУСКАЕМ ПАНЕЛЬ ПРИ СТАРТЕ СЕРВЕРА
 CMD ["/usr/local/x-ui/x-ui", "run"]
+
+CMD ["/usr/local/x-ui/x-ui", 
